@@ -28,6 +28,7 @@ class Window:
     ):
         line.draw(self.__canvas, fill_color)
 
+
 class Point:
     def __init__(self, x, y):
         self.x = x
@@ -65,6 +66,12 @@ class Cell:
         self._win = win
 
     def draw(self, top_left_x, top_left_y, bottom_right_x, bottom_right_y):
+        if self._win is None:
+            return
+        self._x1 = top_left_x
+        self._y1 = top_left_y
+        self._x2 = bottom_right_x
+        self._y2 = bottom_right_y
         if self.has_left_wall:
             line = Line(Point(top_left_x, top_left_y), Point(top_left_x, bottom_right_y))
             self._win.draw_line(line)
@@ -77,3 +84,14 @@ class Cell:
         if self.has_bottom_wall:
             line = Line(Point(top_left_x, bottom_right_y), Point(bottom_right_x, bottom_right_y))
             self._win.draw_line(line)
+
+    def draw_move(self, to_cell, undo=False):
+       
+        start = Point((self._x1 + self._x2) // 2, (self._y1 + self._y2) // 2)
+        end = Point((to_cell._x1 + to_cell._x2) // 2, (to_cell._y1 + to_cell._y2) // 2)
+        move =  Line(start, end)
+        
+        fill_color = "red"
+        if undo:
+            fill_color = "grey"
+        self._win.draw_line(move, fill_color)
