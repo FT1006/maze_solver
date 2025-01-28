@@ -65,6 +65,7 @@ class Cell:
         self._x2 = None
         self._y2 = None
         self._win = win
+        self.visited = False
 
     def draw(self, top_left_x, top_left_y, bottom_right_x, bottom_right_y):
         if self._win is None:
@@ -104,8 +105,7 @@ class Cell:
         self._win.draw_line(line, fill_color)
 
 
-    def draw_move(self, to_cell, undo=False):
-       
+    def draw_move(self, to_cell, undo=False):      
         start = Point((self._x1 + self._x2) // 2, (self._y1 + self._y2) // 2)
         end = Point((to_cell._x1 + to_cell._x2) // 2, (to_cell._y1 + to_cell._y2) // 2)
         move =  Line(start, end)
