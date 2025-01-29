@@ -9,8 +9,8 @@ def main():
     cell_size_y = 100
     num_rows = height // cell_size_x - 1
     num_cols = width // cell_size_y - 1
-    maze = Maze(50, 50, num_rows, num_cols, cell_size_x, cell_size_y, window, seed=1)
-    maze._create_cells()
+    maze = Maze(50, 50, num_rows, num_cols, cell_size_x, cell_size_y, window)
+    maze.solve()
     window.wait_for_close()
 
 main()
